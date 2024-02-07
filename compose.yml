@@ -13,7 +13,7 @@ services:
 
   myapp:
     tty: true
-    image: docker.io/bitnami/laravel:8
+    image: docker.io/bitnami/laravel:latest
     environment:
       - DB_HOST=mariadb
       - DB_USERNAME=my_user
