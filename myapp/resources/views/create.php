@@ -12,11 +12,11 @@
     <div style="display: flex">
         <div style="margin: 12px;">
             <input type="text" placeholder="add a task" style="margin: 20px; padding: 4px;">
-            <input type="date" style="">
-            <input type="time" style="">
-            <button type="submit" style="margin: 8px;">Add</button>
+            <input type="date">
+            <input type="time">
+            <button type="submit" style="margin: 8px; padding:4px">Add</button>
+            <textarea name="details" id="details" placeholder="details" cols="30" rows="10" style="margin: 24px; height:60px"></textarea>
         </div>
-        <textarea name="details" id="details" placeholder="details" cols="30" rows="10" style="margin: 24px;"></textarea>
     </div>
 </body>
 
