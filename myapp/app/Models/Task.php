@@ -4,8 +4,10 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Flight extends Model
+class Task extends Model
 {
+    protected $connection = "tasks";
+
     protected $table = "tasks";
     protected $primaryKey = "id";
 }
