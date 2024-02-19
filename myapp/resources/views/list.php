@@ -13,6 +13,7 @@
         <div style="display:flex;">
             <p style="padding: 10px;">task_name</p>
             <p style="padding: 10px;">daedline</p>
+            <input type="checkbox"></button>
         </div>
         <button type="button" id="open" style="padding: 10px;">open</button>
         <p id="detail" style="display: none; padding: 10px;">details</p>
