@@ -24,3 +24,5 @@ Route::get('/create', function () {
 Route::get('/list', function () {
     return view('list');
 });
+
+Route::post('/create', 'App\Http\Controllers\TaskController@create');
