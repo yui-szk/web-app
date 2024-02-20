@@ -7,6 +7,7 @@ use App\Models\Task;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
+
 class TaskController extends Controller
 {
     public function create(Request $request): RedirectResponse
@@ -20,5 +21,13 @@ class TaskController extends Controller
         $task->save();
 
         return redirect('/create');
+    }
+
+    public function index(){
+        foreach (Task::all() as $task){
+            echo $task->name;
+        }
+
+        return view('list');
     }
 }

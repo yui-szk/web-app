@@ -26,3 +26,5 @@ Route::get('/list', function () {
 });
 
 Route::post('/create', 'App\Http\Controllers\TaskController@create');
+
+Route::get('/list', 'App\Http\Controllers\TaskController@index');
