@@ -8,4 +8,5 @@ class Task extends Model
 {
     protected $connection = "my_database";
     protected $table = "tasks";
+    protected $guarded = ['id', 'created_at', 'updated_at'];
 }
