@@ -9,15 +9,13 @@ use Illuminate\Http\Request;
 
 class TaskController extends Controller
 {
-
     public function create(Request $request): RedirectResponse
     {
         $task = new Task;
 
-        $task->id = $request->id;
         $task->name = $request->name;
         $task->deadline_date = $request->deadline_date;
-        $task->complete = $request->complete;
+        $task->complete = $request->boolean(0);
 
         $task->save();
 
