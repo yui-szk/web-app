@@ -15,12 +15,12 @@
             <p style="padding: 10px;">daedline</p>
             <input type="checkbox"></button>
         </div>
-        <button type="button" id="open" style="padding: 10px;">open</button>
-        <p id="detail" style="display: none; padding: 10px;">details</p>
+        {{-- <button type="button" id="open" style="padding: 10px;">open</button>
+        <p id="detail" style="display: none; padding: 10px;">details</p> --}}
     </div>
 </body>
 
-<script>
+{{-- <script>
     const detailsButton = document.getElementById("open")
     const detailsBox = document.getElementById("detail")
 
@@ -31,6 +31,6 @@
     detailsButton.addEventListener('click', () => {
         appearDetails(detailsBox)
     })
-</script>
+</script> --}}
 
 </html>
