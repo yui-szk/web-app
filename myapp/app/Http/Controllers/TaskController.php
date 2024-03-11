@@ -20,7 +20,7 @@ class TaskController extends Controller
 
         $task->save();
 
-        return redirect('/create');
+        return redirect('/list');
     }
 
     public function index(){
