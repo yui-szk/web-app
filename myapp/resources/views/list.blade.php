@@ -11,12 +11,49 @@
     <h1>List Page</h1>
     <div style="align-items:center; margin: 20px;">
         <div style="display:flex;">
-            <p style="padding: 10px;">task_name</p>
-            <p style="padding: 10px;">daedline</p>
             <input type="checkbox"></button>
         </div>
         {{-- <button type="button" id="open" style="padding: 10px;">open</button>
         <p id="detail" style="display: none; padding: 10px;">details</p> --}}
+        <table style="text-align: center">
+            <tr>
+              <th>
+                name
+              </th>
+              <th style="padding: 0 30px">
+                deadline
+              </th>
+            </tr>
+            @foreach ($tasks as $item)
+                <tr>
+                    <td>
+                        {{$item->name}}
+                    </td>
+                    <td>
+                        {{$item->deadline_date}}
+                    </td>
+                    <td>
+                        <form action="/list/{{$item->id}}" method="POST">
+                            @csrf
+                            @method('PUT')
+                            <button type="submit">complete</button>
+                        </form>
+                    </td>
+                    <td>
+                        <a href="/edit/{{$item->id}}" method="POST">
+                            <button type="submit">edit</button>
+                        </a>
+                    </td>
+                    <td>
+                        <form action="/list/{{$item->id}}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit">delete</button>
+                        </form>
+                    </td>
+                </tr>
+            @endforeach
+        </table>
     </div>
 </body>
 
@@ -28,7 +65,7 @@
         elm.style.display == "" ? elm.style.display = 'none' : elm.style.display = ""
     }
 
-    detailsButton.addEventListener('click', () => {
+    detailsButton.addEventListener('click'                                                                                                          , () => {
         appearDetails(detailsBox)
     })
 </script> --}}

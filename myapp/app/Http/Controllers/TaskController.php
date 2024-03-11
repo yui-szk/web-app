@@ -24,10 +24,12 @@ class TaskController extends Controller
     }
 
     public function index(){
-        foreach (Task::all() as $task){
-            echo $task->name;
-        }
+        $tasks = Task::all();
+        return view('list', compact('tasks'));
+    }
 
-        return view('list');
+    public function edit($id){
+        $task = Task::find($id);
+        return view('edit', compact('task'));
     }
 }

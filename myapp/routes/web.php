@@ -25,6 +25,11 @@ Route::get('/list', function () {
     return view('list');
 });
 
-Route::post('/create', 'App\Http\Controllers\TaskController@create');
+Route::get('/edit', function(){
+    return view('edit');
+});
 
+Route::post('/create', 'App\Http\Controllers\TaskController@create');
 Route::get('/list', 'App\Http\Controllers\TaskController@index');
+Route::post('/edit', 'App\Http\Controllers\TaskController@edit');
+Route::post('/delete', 'App\Http\Controllers\TaskController@delete');
