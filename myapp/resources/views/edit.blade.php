@@ -10,7 +10,7 @@
     <body>
         <h1>Edit Page</h1>
         <div style="display: flex">
-            <form method="POST" action="/tasks/{{$task->id}}">
+            <form method="POST" action="/list">
                 @csrf
                 @method('PUT')
 

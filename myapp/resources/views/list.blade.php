@@ -33,7 +33,7 @@
                         {{$item->deadline_date}}
                     </td>
                     <td>
-                        <form action="/list/{{$item->id}}" method="POST">
+                        <form action="/list" method="POST">
                             @csrf
                             @method('PUT')
                             <button type="submit">complete</button>
@@ -45,7 +45,7 @@
                         </a>
                     </td>
                     <td>
-                        <form action="/list/{{$item->id}}" method="POST">
+                        <form onsubmit="return deleteTask();" action="/list" method="POST">
                             @csrf
                             @method('DELETE')
                             <button type="submit">delete</button>
@@ -57,17 +57,22 @@
     </div>
 </body>
 
-{{-- <script>
-    const detailsButton = document.getElementById("open")
-    const detailsBox = document.getElementById("detail")
+<script>
+    // const detailsButton = document.getElementById("open")
+    // const detailsBox = document.getElementById("detail")
 
-    function appearDetails(elm) {
-        elm.style.display == "" ? elm.style.display = 'none' : elm.style.display = ""
-    }
+    // function appearDetails(elm) {
+    //     elm.style.display == "" ? elm.style.display = 'none' : elm.style.display = ""
+    // }
 
-    detailsButton.addEventListener('click'                                                                                                          , () => {
-        appearDetails(detailsBox)
-    })
-</script> --}}
+    // detailsButton.addEventListener('click'                                                                                                          , () => {
+    //     appearDetails(detailsBox)
+    // })
+
+        function deleteTask(){
+            confirm('本当に削除しますか？') ? true : false;
+        }
+
+</script>
 
 </html>
