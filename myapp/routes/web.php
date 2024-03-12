@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\TaskController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -25,11 +26,11 @@ Route::get('/list', function () {
     return view('list');
 });
 
-Route::get('/edit', function(){
-    return view('edit');
-});
+Route::post('/create', [TaskController::class, 'create']);
 
-Route::post('/create', 'App\Http\Controllers\TaskController@create');
-Route::get('/list', 'App\Http\Controllers\TaskController@index');
-Route::post('/edit', 'App\Http\Controllers\TaskController@edit');
-Route::post('/delete', 'App\Http\Controllers\TaskController@delete');
+Route::get('/list', [TaskController::class, 'show']);
+Route::post('/list', [TaskController::class, 'show']);
+Route::delete('/list', [TaskController::class, 'delete']);
+Route::put('/list', [TaskController::class, 'update']);
+
+Route::get('/edit/{id}', [TaskController::class, 'edit']);
