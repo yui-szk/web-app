@@ -23,7 +23,7 @@ class TaskController extends Controller
         return redirect('/list');
     }
 
-    public function index(){
+    public function show(){
         $tasks = Task::all();
         return view('list', compact('tasks'));
     }
@@ -31,5 +31,19 @@ class TaskController extends Controller
     public function edit($id){
         $task = Task::find($id);
         return view('edit', compact('task'));
+    }
+
+    public function update($id, Request $request){
+        $task = Task::find($id);
+        $task->name = $request->name;
+        $task->deadline_date = $request->deadline_date;
+        $task->save();
+
+        return redirect('/list');
+    }
+
+    public function delete($id){
+        Task::find($id)->delete();
+        return redirect('/list');
     }
 }
