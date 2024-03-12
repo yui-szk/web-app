@@ -17,20 +17,21 @@
         <p id="detail" style="display: none; padding: 10px;">details</p> --}}
         <table style="text-align: center">
             <tr>
-              <th>
-                name
-              </th>
-              <th style="padding: 0 30px">
-                deadline
-              </th>
+                <th>
+                    name
+                </th>
+
+                <th style="padding: 0 30px">
+                    deadline
+                </th>
             </tr>
-            @foreach ($tasks as $item)
+            @foreach ($tasks as $task)
                 <tr>
                     <td>
-                        {{$item->name}}
+                        {{ $task->name }}
                     </td>
                     <td>
-                        {{$item->deadline_date}}
+                        {{ $task->deadline_date }}
                     </td>
                     <td>
                         <form action="/list" method="POST">
@@ -40,7 +41,7 @@
                         </form>
                     </td>
                     <td>
-                        <a href="/edit/{{$item->id}}" method="POST">
+                        <a href="/edit/{{ $task->id }}" method="POST">
                             <button type="submit">edit</button>
                         </a>
                     </td>
@@ -48,6 +49,7 @@
                         <form onsubmit="return deleteTask();" action="/list" method="POST">
                             @csrf
                             @method('DELETE')
+                            <input type="hidden" name="id" value="{{ $task->id }}">
                             <button type="submit">delete</button>
                         </form>
                     </td>
@@ -69,10 +71,9 @@
     //     appearDetails(detailsBox)
     // })
 
-        function deleteTask(){
-            confirm('本当に削除しますか？') ? true : false;
-        }
-
+    function deleteTask() {
+        return confirm('本当に削除しますか？') ? true : false;
+    }
 </script>
 
 </html>
