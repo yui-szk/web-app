@@ -19,7 +19,7 @@ class TaskController extends Controller
 
         $task->name = $request->name;
         $task->deadline_date = $request->deadline_date;
-        $task->complete = $request->boolean(0);
+        $task->status = $request->boolean(0);
 
         $task->save();
 
@@ -44,7 +44,7 @@ class TaskController extends Controller
     {
         $task = Task::find($request->id);
 
-        if ($request->complete === null) {
+        if ($request->status === null) {
             $request->validate([
                 'name' => 'required|max:50',
                 'deadline_date' => 'required|after:yesterday',
@@ -54,7 +54,7 @@ class TaskController extends Controller
             $task->deadline_date = $request->deadline_date;
 
         } else {
-            $task->complete = true;
+            $task->status = true;
         }
 
         $task->save();
