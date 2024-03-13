@@ -15,11 +15,11 @@
         <table style="text-align: center">
             <tr>
                 <th>
-                    name
+                    @sortablelink('name')
                 </th>
 
                 <th style="padding: 0 30px">
-                    deadline
+                    @sortablelink('deadline')
                 </th>
             </tr>
             @foreach ($tasks as $task)

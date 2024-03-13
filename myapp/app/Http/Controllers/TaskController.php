@@ -29,7 +29,6 @@ class TaskController extends Controller
     public function show()
     {
         $tasks = Task::all();
-
         return view('list', compact('tasks'));
     }
 

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
+use Kyslik\ColumnSortable\Sortable;
 
 class Task extends Model
 {
@@ -19,4 +20,8 @@ class Task extends Model
 
         return $data;
     }
+
+    use Sortable;
+
+    public $sortable = ['name', 'deadline_date'];
 }
