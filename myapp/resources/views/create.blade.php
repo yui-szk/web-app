@@ -17,6 +17,15 @@
             <button type="submit" style="margin: 8px; padding:4px">Add</button>
         </form>
     </div>
+    @if ($errors->any())
+    <div>
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li style="color: red">{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+    @endif
 </body>
 
 </html>

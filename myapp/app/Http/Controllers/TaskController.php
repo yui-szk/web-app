@@ -10,6 +10,11 @@ class TaskController extends Controller
 {
     public function create(Request $request): RedirectResponse
     {
+        $varidated = $request->validate([
+            'name' => 'required|max:50',
+            'deadline_date' => 'required|after:yesterday',
+        ]);
+
         $task = new Task();
 
         $task->name = $request->name;
@@ -38,8 +43,20 @@ class TaskController extends Controller
     public function update(Request $request)
     {
         $task = Task::find($request->id);
-        $task->name = $request->name;
-        $task->deadline_date = $request->deadline_date;
+
+        if ($request->status === null) {
+            $varidated = $request->validate([
+                'name' => 'required|max:50',
+                'deadline_date' => 'required|after:yesterday',
+            ]);
+
+            $task->name = $request->name;
+            $task->deadline_date = $request->deadline_date;
+
+        } else {
+            $task->complete = true;
+        }
+
         $task->save();
 
         return redirect('/list');

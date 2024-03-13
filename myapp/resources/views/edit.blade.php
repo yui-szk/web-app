@@ -15,11 +15,20 @@
             @method('PUT')
 
             <input type="hidden" name="id" value="{{ $task->id }}">
-            <input type="text" name="name" value="{{ $task->name }}" style="margin: 20px; padding: 4px;">
+            <input type="text" name="name" placeholder="task name" value="{{ $task->name }}" style="margin: 20px; padding: 4px;">
             <input type="date" name="deadline_date" value="{{ $task->deadline_date }}">
             <button type="submit" style="margin: 8px; padding:4px">Edit</button>
         </form>
     </div>
+    @if ($errors->any())
+    <div>
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li style="color: red">{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+    @endif
 </body>
 
 </html>

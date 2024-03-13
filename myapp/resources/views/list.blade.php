@@ -10,9 +10,6 @@
 <body>
     <h1>List Page</h1>
     <div style="align-items:center; margin: 20px;">
-        <div style="display:flex;">
-            <input type="checkbox"></button>
-        </div>
         {{-- <button type="button" id="open" style="padding: 10px;">open</button>
         <p id="detail" style="display: none; padding: 10px;">details</p> --}}
         <table style="text-align: center">
