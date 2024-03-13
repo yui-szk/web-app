@@ -34,7 +34,9 @@
                         <form action="/list" method="POST">
                             @csrf
                             @method('PUT')
-                            <input type="hidden" name="complete" value="{{$task->complete}}">
+                            <input type="hidden" name="id" value="{{ $task->id }}">
+                            <input type="hidden" name="status" value="{{$task->status}}">
+                            <input type="checkbox" name="status" {{ $task->status ? 'checked' : '' }} />
                             <button type="submit">complete</button>
                         </form>
                     </td>
