@@ -34,6 +34,7 @@
                         <form action="/list" method="POST">
                             @csrf
                             @method('PUT')
+                            <input type="hidden" name="complete" value="{{$task->complete}}">
                             <button type="submit">complete</button>
                         </form>
                     </td>

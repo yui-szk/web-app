@@ -44,7 +44,7 @@ class TaskController extends Controller
     {
         $task = Task::find($request->id);
 
-        if ($request->status === null) {
+        if ($request->complete === null) {
             $varidated = $request->validate([
                 'name' => 'required|max:50',
                 'deadline_date' => 'required|after:yesterday',
