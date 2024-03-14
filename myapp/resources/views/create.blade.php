@@ -13,7 +13,7 @@
         <form method="POST" action="/create" style="margin: 12px;">
             @csrf
             <input type="text" name="name" placeholder="add a task" style="margin: 20px; padding: 4px;">
-            <input type="date" name="deadline_date">
+            <input type="date" name="deadline">
             <button type="submit" style="margin: 8px; padding:4px">Add</button>
         </form>
     </div>

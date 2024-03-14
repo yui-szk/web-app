@@ -28,7 +28,7 @@
                         {{ $task->name }}
                     </td>
                     <td>
-                        {{ $task->deadline_date }}
+                        {{ $task->deadline }}
                     </td>
                     <td>
                         <form action="/list" method="POST">
