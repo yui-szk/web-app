@@ -22,14 +22,9 @@ Route::get('/create', function () {
     return view('create');
 });
 
-Route::get('/list', function () {
-    return view('list');
-});
-
 Route::post('/create', [TaskController::class, 'create']);
 
 Route::get('/list', [TaskController::class, 'show']);
-Route::post('/list', [TaskController::class, 'show']);
 Route::delete('/list', [TaskController::class, 'delete']);
 Route::put('/list', [TaskController::class, 'update']);
 
