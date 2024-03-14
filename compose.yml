@@ -8,6 +8,8 @@ services:
       - MARIADB_PASSWORD=my_password
     ports:
       - 3306:3306
+    volumes:
+      - ./mariadb/init://docker-entrypoint-initdb.d
 
   myapp:
     tty: true
