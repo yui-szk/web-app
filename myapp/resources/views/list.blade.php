@@ -8,18 +8,29 @@
 </head>
 
 <body>
+
     <h1>List Page</h1>
-    <div style="align-items:center; margin: 20px;">
-        {{-- <button type="button" id="open" style="padding: 10px;">open</button>
-        <p id="detail" style="display: none; padding: 10px;">details</p> --}}
-        <table style="text-align: center">
+    <form action="/list" method="POST">
+        @csrf
+        <select name="sortby" id="task-sort" onchange="submit(this.form)">
+            <option value="default">default</option>
+            <option value="deadline" {{ $sortby === 'deadline' ? 'selected' : ''}}>deadline</option>
+            <option value="latest" {{ $sortby === 'latest' ? 'selected' : ''}}>latest</option>
+            <option value="oldest" {{ $sortby == 'oldest' ? 'selected' : ''}}>oldest</option>
+        </select>
+    </form>
+    <div>
+        <table>
             <tr>
                 <th>
                     name
                 </th>
 
-                <th style="padding: 0 30px">
+                <th>
                     deadline
+                </th>
+                <th>
+                    created_at
                 </th>
             </tr>
             @foreach ($tasks as $task)
@@ -29,6 +40,9 @@
                     </td>
                     <td>
                         {{ $task->deadline }}
+                    </td>
+                    <td>
+                        {{ $task->created_at }}
                     </td>
                     <td>
                         <form action="/list" method="POST">
@@ -60,17 +74,6 @@
 </body>
 
 <script>
-    // const detailsButton = document.getElementById("open")
-    // const detailsBox = document.getElementById("detail")
-
-    // function appearDetails(elm) {
-    //     elm.style.display == "" ? elm.style.display = 'none' : elm.style.display = ""
-    // }
-
-    // detailsButton.addEventListener('click'                                                                                                          , () => {
-    //     appearDetails(detailsBox)
-    // })
-
     function deleteTask() {
         return confirm('本当に削除しますか？') ? true : false;
     }

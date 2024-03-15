@@ -12,7 +12,7 @@ class TaskController extends Controller
     {
         $request->validate([
             'name' => 'required|max:50',
-            'deadline' => 'required|after:yesterday',
+            'deadline' => 'nullable',
         ]);
 
         $task = new Task();
@@ -29,8 +29,8 @@ class TaskController extends Controller
     public function show()
     {
         $tasks = Task::all();
-
-        return view('list', compact('tasks'));
+        $sortby = 'default';
+        return view('list', compact('tasks', 'sortby'));
     }
 
     public function edit($id)
@@ -47,7 +47,7 @@ class TaskController extends Controller
         if ($request->status === null) {
             $request->validate([
                 'name' => 'required|max:50',
-                'deadline' => 'required|after:yesterday',
+                'deadline' => 'nullable',
             ]);
 
             $task->name = $request->name;
@@ -68,5 +68,26 @@ class TaskController extends Controller
         $task->delete();
 
         return redirect('/list');
+    }
+
+    public function sort(Request $request){
+        $tasks = new Task;
+        $sortby = $request->sortby;
+
+        switch ($sortby){
+            case 'default' :
+                return redirect('/list');
+            case 'deadline' :
+                $tasks = Task::orderby('deadline', 'asc')->get();
+                break;
+            case 'latest' :
+                $tasks = Task::latest()->get();
+                break;
+            case 'oldest' :
+                $tasks = Task::oldest()->get();
+                break;
+        }
+
+        return view('list', compact('tasks', 'sortby'));
     }
 }
