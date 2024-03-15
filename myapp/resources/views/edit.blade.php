@@ -9,22 +9,22 @@
 
 <body>
     <h1>Edit Page</h1>
-    <div style="display: flex">
+    <div>
         <form method="POST" action="/list">
             @csrf
             @method('PUT')
 
             <input type="hidden" name="id" value="{{ $task->id }}">
-            <input type="text" name="name" placeholder="task name" value="{{ $task->name }}" style="margin: 20px; padding: 4px;">
+            <input type="text" name="name" placeholder="task name" value="{{ $task->name }}">
             <input type="date" name="deadline" value="{{ $task->deadline }}">
-            <button type="submit" style="margin: 8px; padding:4px">Edit</button>
+            <button type="submit">Edit</button>
         </form>
     </div>
     @if ($errors->any())
     <div>
         <ul>
             @foreach ($errors->all() as $error)
-                <li style="color: red">{{ $error }}</li>
+                <li>{{ $error }}</li>
             @endforeach
         </ul>
     </div>

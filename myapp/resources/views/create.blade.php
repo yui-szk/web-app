@@ -9,19 +9,19 @@
 
 <body>
     <h1>Create Page</h1>
-    <div style="display: flex">
-        <form method="POST" action="/create" style="margin: 12px;">
+    <div>
+        <form method="POST" action="/create">
             @csrf
-            <input type="text" name="name" placeholder="add a task" style="margin: 20px; padding: 4px;">
+            <input type="text" name="name" placeholder="add a task">
             <input type="date" name="deadline">
-            <button type="submit" style="margin: 8px; padding:4px">Add</button>
+            <button type="submit">Add</button>
         </form>
     </div>
     @if ($errors->any())
     <div>
         <ul>
             @foreach ($errors->all() as $error)
-                <li style="color: red">{{ $error }}</li>
+                <li>{{ $error }}</li>
             @endforeach
         </ul>
     </div>
