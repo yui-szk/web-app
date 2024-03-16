@@ -30,4 +30,4 @@ Route::put('/list', [TaskController::class, 'update']);
 
 Route::get('/edit/{id}', [TaskController::class, 'edit']);
 
-Route::post('/list', [TaskController::class, 'sort']);
+Route::post('/list', [TaskController::class, 'select']);

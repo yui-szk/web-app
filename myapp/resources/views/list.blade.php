@@ -10,15 +10,30 @@
 <body>
 
     <h1>List Page</h1>
-    <form action="/list" method="POST">
-        @csrf
-        <select name="sortby" id="task-sort" onchange="submit(this.form)">
-            <option value="default">default</option>
-            <option value="deadline" {{ $sortby === 'deadline' ? 'selected' : ''}}>deadline</option>
-            <option value="latest" {{ $sortby === 'latest' ? 'selected' : ''}}>latest</option>
-            <option value="oldest" {{ $sortby == 'oldest' ? 'selected' : ''}}>oldest</option>
-        </select>
-    </form>
+    <div>
+        <a href="/create" method="GET">
+            <button type="submit">Add a task</button>
+        </a>
+        <form action="/list" method="POST">
+            @csrf
+            <label for="task-select">Sort:</label>
+            <select name="sort" id="task-sort" onchange="submit(this.form)">
+                <option value="">default</option>
+                <option value="deadline|asc" {{isset($sort) && $sort === 'deadline|asc' ? 'selected' : ''}}>deadline</option>
+                <option value="created_at|desc" {{ isset($sort) && $sort === 'created_at|desc' ? 'selected' : ''}}>latest</option>
+                <option value="created_at|asc" {{ isset($sort) && $sort == 'created_at|asc' ? 'selected' : ''}}>oldest</option>
+            </select>
+        </form>
+        <form action="/list" method="POST">
+            @csrf
+            <label for="task-filter">Filter:</label>
+            <select name="filter" id="task-filter" onchange="submit(this.form)">
+                <option value="">default</option>
+                <option value="1" {{ isset($filter) && $filter === '1' ? 'selected' : ''}}>completed</option>
+                <option value="0" {{ isset($filter) && $filter === '0' ? 'selected' : ''}}>not-completed</option>
+            </select>
+        </form>
+    </div>
     <div>
         <table>
             <tr>
