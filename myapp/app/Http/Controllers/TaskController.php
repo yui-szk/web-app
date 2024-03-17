@@ -8,7 +8,45 @@ use Illuminate\Http\Request;
 
 class TaskController extends Controller
 {
-    public function create(Request $request): RedirectResponse
+    public function index(Request $request)
+    {
+        $tasks = new Task;
+        $filter = $request->filter;
+        $sort = '';
+
+        switch ($request->sort) {
+            case 'deadline':
+                $sort = 'deadline|asc';
+                break;
+            case 'latest':
+                $sort = 'created_at|desc';
+                break;
+            case 'oldest':
+                $sort = 'created_at|asc';
+                break;
+        }
+
+        if ($filter != null && $sort != null) {
+            $tasks = Task::whereStatus($filter)->orderby(explode('|', $sort)[0], explode('|', $sort)[1])->get();
+        } elseif ($filter != null) {
+            $tasks = Task::whereStatus($filter)->get();
+        } elseif ($sort != null) {
+            $tasks = Task::orderby(explode('|', $sort)[0], explode('|', $sort)[1])->get();
+        } else {
+            $tasks = Task::all();
+        }
+
+        $sort = $request->sort;
+
+        return view('list', compact('tasks', 'filter', 'sort'));
+    }
+
+    public function create()
+    {
+        return view('create');
+    }
+
+    public function store(Request $request): RedirectResponse
     {
         $request->validate([
             'name' => 'required|max:50',
@@ -23,7 +61,7 @@ class TaskController extends Controller
 
         $task->save();
 
-        return redirect('/list');
+        return redirect('/tasks');
     }
 
     public function edit($id)
@@ -52,47 +90,14 @@ class TaskController extends Controller
 
         $task->save();
 
-        return redirect('/list');
+        return redirect('/tasks');
     }
 
-    public function delete(Request $request)
+    public function destroy(Request $request)
     {
         $task = Task::find($request->id);
-        $task->delete();
+        $task->delete($request->id);
 
-        return redirect('/list');
+        return redirect('/tasks');
     }
-
-    public function show(Request $request){
-        $tasks = new Task;
-        $filter = $request->filter;
-        $sort = '';
-
-        switch ($request->sort) {
-            case "deadline" :
-                $sort = 'deadline|asc';
-                break;
-            case "latest" :
-                $sort = 'created_at|desc';
-                break;
-            case "oldest" :
-                $sort = 'created_at|asc';
-                break;
-        }
-
-        if($filter != null && $sort != null){
-            $tasks = Task::whereStatus($filter)->orderby(explode('|', $sort)[0], explode('|', $sort)[1])->get();
-        } else if($filter != null){
-            $tasks = Task::whereStatus($filter)->get();
-        } else if ($sort != null){
-            $tasks = Task::orderby(explode('|', $sort)[0], explode('|', $sort)[1])->get();
-        } else {
-            $tasks = Task::all();
-        }
-
-        $sort = $request->sort;
-
-        return view('list', compact('tasks', 'filter', 'sort'));
-    }
-
 }

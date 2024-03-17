@@ -11,11 +11,10 @@
 
     <h1>List Page</h1>
     <div>
-        <a href="/create" method="GET">
+        <a href="/tasks/create" method="GET">
             <button type="submit">Add a task</button>
         </a>
-        <form action="/list" method="POST">
-            @csrf
+        <form action="/tasks" method="GET">
             <label for="task-select">Sort:</label>
             <select name="sort" id="task-sort" onchange="submit(this.form)">
                 <option value="">default</option>
@@ -24,8 +23,7 @@
                 <option value="oldest" {{ isset($sort) && $sort == 'oldest' ? 'selected' : ''}}>oldest</option>
             </select>
         </form>
-        <form action="/list" method="POST">
-            @csrf
+        <form action="/tasks" method="GET">
             <label for="task-filter">Filter:</label>
             <select name="filter" id="task-filter" onchange="submit(this.form)">
                 <option value="">default</option>
@@ -60,7 +58,7 @@
                         {{ $task->created_at }}
                     </td>
                     <td>
-                        <form action="/list" method="POST">
+                        <form action="/tasks/{{$task->id}}" method="POST">
                             @csrf
                             @method('PUT')
                             <input type="hidden" name="id" value="{{ $task->id }}">
@@ -70,12 +68,12 @@
                         </form>
                     </td>
                     <td>
-                        <a href="/edit/{{ $task->id }}" method="POST">
+                        <a href="/tasks/{{ $task->id }}/edit" method="GET">
                             <button type="submit">edit</button>
                         </a>
                     </td>
                     <td>
-                        <form onsubmit="return deleteTask();" action="/list" method="POST">
+                        <form onsubmit="return deleteTask();" action="/tasks/{{ $task->id }}" method="POST">
                             @csrf
                             @method('DELETE')
                             <input type="hidden" name="id" value="{{ $task->id }}">

@@ -10,7 +10,7 @@
 <body>
     <h1>Create Page</h1>
     <div>
-        <form method="POST" action="/create">
+        <form method="POST" action="/tasks">
             @csrf
             <input type="text" name="name" placeholder="Add a task">
             <input type="date" name="deadline">
