@@ -18,3 +18,4 @@ use Illuminate\Support\Facades\Route;
 // Route::post('/list', [TaskController::class, 'show']);
 
 Route::resource('tasks', TaskController::class);
+Route::redirect('/', '/tasks');
