@@ -22,8 +22,6 @@
                 <option value="latest" {{ isset($sort) && $sort === 'latest' ? 'selected' : ''}}>latest</option>
                 <option value="oldest" {{ isset($sort) && $sort == 'oldest' ? 'selected' : ''}}>oldest</option>
             </select>
-        </form>
-        <form action="/tasks" method="GET">
             <label for="task-filter">Filter:</label>
             <select name="filter" id="task-filter" onchange="submit(this.form)">
                 <option value="">default</option>
