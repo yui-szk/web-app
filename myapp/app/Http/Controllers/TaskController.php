@@ -26,12 +26,6 @@ class TaskController extends Controller
         return redirect('/list');
     }
 
-    public function show()
-    {
-        $tasks = Task::all();
-        return view('list', compact('tasks'));
-    }
-
     public function edit($id)
     {
         $task = Task::find($id);
@@ -69,54 +63,36 @@ class TaskController extends Controller
         return redirect('/list');
     }
 
-    public function select(Request $request){
+    public function show(Request $request){
         $tasks = new Task;
-
-        // if ($sortby){
-        //     switch ($sortby){
-        //         case 'default' :
-        //             return redirect('/list');
-        //         case 'deadline' :
-        //             $tasks = Task::orderby('deadline', 'asc')->get();
-        //             break;
-        //         case 'latest' :
-        //             $tasks = Task::orderby('created_at', 'desc')->get();
-        //             break;
-        //         case 'oldest' :
-        //             $tasks = Task::orderby('created_at', 'asc')->get();
-        //             break;
-        //     }
-        // }
-
-        // if ($filterby){
-        //     switch ($filterby){
-        //         case 'default' :
-        //             return redirect('/list');
-        //         case 'completed' :
-        //             $tasks = Task::whereStatus(1)->get();
-        //             break;
-        //         case 'not-completed' :
-        //             $tasks = Task::whereStatus(0)->get();
-        //             break;
-        //     }
-        // }
-
-
         $filter = $request->filter;
-        $sort = $request->sort;
+        $sort = '';
 
-        if($filter && $sort){
-            $tasks = Task::whereStatus($filter)->orderby(explode('|', $sort)[0], explode('|', $sort)[1])->get();
-        } else if(($filter||$filter === 0) && !$sort){
-            $tasks = Task::whereStatus($filter)->get();
-        } else if (!$filter && $sort){
-            $tasks = Task::orderby(explode('|', $sort)[0], explode('|', $sort)[1])->get();
-        } else {
-            return redirect('/list');
+        switch ($request->sort) {
+            case "deadline" :
+                $sort = 'deadline|asc';
+                break;
+            case "latest" :
+                $sort = 'created_at|desc';
+                break;
+            case "oldest" :
+                $sort = 'created_at|asc';
+                break;
         }
 
-        return view('list', compact('tasks', 'filter', 'sort'));
+        if($filter != null && $sort != null){
+            $tasks = Task::whereStatus($filter)->orderby(explode('|', $sort)[0], explode('|', $sort)[1])->get();
+        } else if($filter != null){
+            $tasks = Task::whereStatus($filter)->get();
+        } else if ($sort != null){
+            $tasks = Task::orderby(explode('|', $sort)[0], explode('|', $sort)[1])->get();
+        } else {
+            $tasks = Task::all();
+        }
 
+        $sort = $request->sort;
+
+        return view('list', compact('tasks', 'filter', 'sort'));
     }
 
 }

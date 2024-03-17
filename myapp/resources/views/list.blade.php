@@ -19,9 +19,9 @@
             <label for="task-select">Sort:</label>
             <select name="sort" id="task-sort" onchange="submit(this.form)">
                 <option value="">default</option>
-                <option value="deadline|asc" {{isset($sort) && $sort === 'deadline|asc' ? 'selected' : ''}}>deadline</option>
-                <option value="created_at|desc" {{ isset($sort) && $sort === 'created_at|desc' ? 'selected' : ''}}>latest</option>
-                <option value="created_at|asc" {{ isset($sort) && $sort == 'created_at|asc' ? 'selected' : ''}}>oldest</option>
+                <option value="deadline" {{isset($sort) && $sort === 'deadline' ? 'selected' : ''}}>deadline</option>
+                <option value="latest" {{ isset($sort) && $sort === 'latest' ? 'selected' : ''}}>latest</option>
+                <option value="oldest" {{ isset($sort) && $sort == 'oldest' ? 'selected' : ''}}>oldest</option>
             </select>
         </form>
         <form action="/list" method="POST">
